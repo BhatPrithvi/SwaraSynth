@@ -7,5 +7,6 @@ build/
 .pytest_cache/
 .mypy_cache/
 *.mid
+*.wav
 out.mid
 .DS_Store

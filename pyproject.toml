@@ -18,6 +18,8 @@ classifiers = [
 ]
 dependencies = [
     "pretty_midi>=0.2.10",
+    "pyfluidsynth>=1.4.0",
+    "numpy>=1.26",
 ]
 
 [project.optional-dependencies]

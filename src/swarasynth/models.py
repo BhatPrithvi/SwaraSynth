@@ -17,6 +17,7 @@ class SwaraToken:
 
     name: str
     octave_shift: int = 0  # -1 lower (.), 0 middle, +1 upper (')
+    speed: float = 1.0  # Shivkumar: lowercase = 2.0 (double speed, half duration)
 
 
 @dataclass(frozen=True)
@@ -34,4 +35,5 @@ class TimedNote:
     start: float
     duration: float
     velocity: int = 90
+    pitch_offset_cents: float = 0.0
     pitch_bends: tuple[tuple[float, float], ...] = ()  # (offset_sec, cents)

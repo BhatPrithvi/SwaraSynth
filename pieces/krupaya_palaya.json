@@ -1,0 +1,57 @@
+{
+  "id": "krupaya_palaya",
+  "title": "Krupaya Palaya Sauri",
+  "composer": "Maharaja Swati Tirunal",
+  "raga": "charukeshi",
+  "tala": "misra_chapu",
+  "tonic_default": "E",
+  "aksharams_per_minute": 100,
+  "source": "https://www.shivkumar.org/music/krupayapalaya.htm",
+  "practice": {
+    "comment": "Tutor mode: piano, clear pitches/rhythm. Use --expressive for violin+gamaka.",
+    "gamaka": false,
+    "gamaka_depth": 0.5,
+    "connecting_jarus": false,
+    "syllable_rhythm": true,
+    "syllable_articulation": true,
+    "group_gap_ms": 40,
+    "apply_shruti": false,
+    "instrument_program": 0,
+    "aksharams_per_minute": 86,
+    "hold_aksharams": 1.0,
+    "opening_hold_aksharams": 1.0,
+    "comma_hold_aksharams": 1.0
+  },
+  "sections": [
+    {
+      "name": "pallavi",
+      "notation": "examples/krupaya_palaya/pallavi.txt",
+      "description": "Krupaya Paalaya Shaure (4 lines)"
+    },
+    {
+      "name": "karuna",
+      "notation": "examples/krupaya_palaya/karuna.txt",
+      "description": "Karunaarasaavaala"
+    },
+    {
+      "name": "kalusha",
+      "notation": "examples/krupaya_palaya/kalusha.txt",
+      "description": "Kalushaartthi Viraama"
+    },
+    {
+      "name": "paahi",
+      "notation": "examples/krupaya_palaya/paahi.txt",
+      "description": "Paahi Shaure"
+    },
+    {
+      "name": "anupallavi",
+      "notation": "examples/krupaya_palaya/anupallavi.txt",
+      "description": "Tapaneeya Nibha Chela..."
+    },
+    {
+      "name": "charanam",
+      "notation": "examples/krupaya_palaya/charanam.txt",
+      "description": "Kuru Mekushalam..."
+    }
+  ]
+}

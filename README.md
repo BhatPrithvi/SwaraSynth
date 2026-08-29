@@ -1,8 +1,10 @@
 # SwaraSynth
 
-Carnatic swara notation → MIDI, with optional raga gamakas (pitch bend).
+> **Status: archived experiment (private).** Not maintained; not recommended for Carnatic study.
+>
+> SwaraSynth turns Shivkumar-style swara notation into **dry practice audio** — syllable rhythm, tala clicks, and a piano sketch of pitch and speed. It is a **notation and laya checker**, not a guru, not a raga synthesizer, and not a substitute for lesson recordings or singing with your teacher. **No teacher would recommend this for learning gayaki, shruti, or raga ethos.** Use a real reference recording and your teacher's guidance for that. Expressive mode (violin + gamaka) remains experimental and does not reproduce Charukeshi or kriti phrasing.
 
-Paste notation like `P , D1 P M1 G3 , M1 R2 S ,`, pick a raga profile, get a `.mid` file. Gamakas are applied from JSON rules in each raga profile (kampita oscillation, jaru slides). Use `--no-gamaka` for plain swaras.
+Carnatic swara notation → practice audio. Renders kriti sections with **Misra Chapu timing**, **tanpura drone**, **tala clicks**, and **looping** for practice.
 
 ## Install
 
@@ -12,44 +14,59 @@ source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-## Usage
+On Raspberry Pi / Debian, install a GM soundfont for practice audio:
 
 ```bash
-swarasynth list-ragas
-swarasynth show examples/krupaya_palaya_opening.txt
-swarasynth render examples/krupaya_palaya_opening.txt -o out.mid --raga charukeshi
-swarasynth render examples/krupaya_palaya_opening.txt -o plain.mid --no-gamaka
+sudo apt install fluid-soundfont-gm
 ```
 
-Options: `--tempo`, `--beat`, `--hold`, `--no-gamaka`.
+## Practice (tutor mode)
+
+Renders **piano** (clear pitches) with **syllable rhythm**, **tanpura**, and **tala clicks**. No gamaka by default — use a lesson recording for ornament.
+
+```bash
+swarasynth list-pieces
+swarasynth practice krupaya_palaya --section pallavi --loop 4 --tonic E -o pallavi.wav
+swarasynth practice krupaya_palaya --section karuna --loop 2 -o karuna.wav --midi
+```
+
+Optional expressive mode (experimental — not recommended):
+
+```bash
+swarasynth practice krupaya_palaya --section pallavi --expressive -o expressive.wav
+```
+
+`--expressive` enables violin + gamaka. It does not sound like a vocal or violin lesson and is not suitable for learning ornament or intonation.
+
+Sections: `pallavi`, `karuna`, `kalusha`, `paahi`, `anupallavi`, `charanam`
+
+Options: `--loop`, `--tonic`, `--program 0|40`, `--expressive`, `--no-tanpura`, `--no-clicks`, `--gamaka` / `--no-gamaka`, `--midi`
+
+## MIDI export (legacy)
+
+```bash
+swarasynth render examples/krupaya_palaya/pallavi.txt -o out.mid --tonic E --no-gamaka
+```
 
 ## Notation
 
 - Swaras: `S`, `R1`–`R3`, `G1`–`G3`, `M1`–`M2`, `P`, `D1`–`D3`, `N1`–`N3`
 - Octave: `'` upper, `.` lower (`S'`, `.S`)
-- `,` lengthens the previous note
-
-## Gamaka rules
-
-Raga JSON files include a `gamaka_rules` list. Each rule matches a swara (optionally `when_prev` / `when_next`) and applies:
-
-| type | effect |
-|------|--------|
-| `kampita` | oscillation around the written pitch (`depth_cents`, `cycles`) |
-| `jaru_in` | slide into the note from the previous swara (`depth_cents`, `portion`) |
-| `jaru_out` | slide out toward the next swara (`depth_cents`, `portion`) |
-
-## Example
-
-Opening of *Krupaya Palaya Sauri* (Swati Tirunal), raga Charukeshi — see `examples/krupaya_palaya_opening.txt`.
+- Shivkumar speed: **lowercase = double speed** (`P M m g g r S`); uppercase = normal
+- `,` lengthens the **previous** swara (place after sustained syllables: `S' , R2` not `R2 ,`)
+- `;` double hold
 
 ## Layout
 
 ```
-src/swarasynth/   parser, tuning, MIDI writer, CLI
-ragas/            raga JSON (scale, pitch map, gamaka rules)
-examples/
-tests/
+src/swarasynth/   parser, tuning, tala, audio, practice, CLI
+pieces/           kriti manifests (sections, tala, tonic)
+examples/         per-section notation files
+ragas/            raga profiles
 ```
+
+## Example
+
+*Krupaya Palaya Sauri* (Swati Tirunal, Charukeshi, Misra Chapu) from [shivkumar.org](https://www.shivkumar.org/music/krupayapalaya.htm) — `pieces/krupaya_palaya.json` + `examples/krupaya_palaya/`
 
 MIT license.

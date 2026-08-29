@@ -1,9 +1,10 @@
 {
   "name": "charukeshi",
   "tradition": "carnatic",
-  "description": "Charukeshi — S R2 G3 M1 P D1 N2 S'",
+  "description": "Charukeshi — S R2 G3 M1 P D1 N2 S' (purvanga≈Shankarabharanam, uttaranga≈Todi)",
   "tonic_midi": 60,
   "scale": ["S", "R2", "G3", "M1", "P", "D1", "N2", "S"],
+  "jeeva_swaras": ["G3", "N2", "D1", "R2"],
   "pitch_map": {
     "S": 0,
     "R1": 1,
@@ -22,41 +23,189 @@
     "N2": 11,
     "N3": 12
   },
+  "shruti_cents": {
+    "R2": -22,
+    "G3": -14,
+    "M1": 0,
+    "P": 2,
+    "D1": -28,
+    "N2": -20,
+    "S": 0
+  },
   "gamaka_rules": [
     {
       "swara": "P",
-      "when_next": "D1",
-      "type": "kampita",
-      "depth_cents": 28,
-      "cycles": 1
+      "when_next": "M1",
+      "type": "jaru_out",
+      "portion": 0.4,
+      "strength": 0.7,
+      "from_prev": true
+    },
+    {
+      "swara": "M1",
+      "when_prev": "P",
+      "type": "jaru_in",
+      "portion": 0.5,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 28,
+      "kampita_cycles": 0.9
+    },
+    {
+      "swara": "M1",
+      "when_next": "G3",
+      "type": "jaru_out",
+      "portion": 0.4,
+      "strength": 0.75,
+      "from_prev": true
     },
     {
       "swara": "G3",
+      "when_prev": "M1",
+      "type": "jaru_in",
+      "portion": 0.48,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 42,
+      "kampita_cycles": 1.2
+    },
+    {
+      "swara": "G3",
+      "when_prev": "G3",
       "type": "kampita",
-      "depth_cents": 32,
-      "cycles": 1.5
+      "depth_cents": 48,
+      "cycles": 1.4
+    },
+    {
+      "swara": "G3",
+      "when_next": "R2",
+      "type": "jaru_out",
+      "portion": 0.4,
+      "strength": 0.7,
+      "from_prev": true
+    },
+    {
+      "swara": "G3",
+      "when_next": "M1",
+      "type": "jaru_in",
+      "portion": 0.4,
+      "from_prev": true
+    },
+    {
+      "swara": "R2",
+      "when_prev": "G3",
+      "type": "jaru_in",
+      "portion": 0.5,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 35,
+      "kampita_cycles": 1.0
+    },
+    {
+      "swara": "R2",
+      "when_next": "G3",
+      "type": "jaru_in",
+      "portion": 0.45,
+      "from_prev": true
+    },
+    {
+      "swara": "R2",
+      "when_prev": "G3",
+      "when_next": "S",
+      "type": "jaru_in",
+      "portion": 0.55,
+      "from_prev": true,
+      "then_kampita": false
     },
     {
       "swara": "R2",
       "when_prev": "M1",
       "when_next": "S",
       "type": "jaru_in",
-      "depth_cents": 55,
-      "portion": 0.4
+      "portion": 0.55,
+      "from_prev": true
     },
     {
       "swara": "M1",
       "when_next": "R2",
       "type": "jaru_out",
-      "depth_cents": 40,
-      "portion": 0.3
+      "portion": 0.4,
+      "strength": 0.7,
+      "from_prev": true
     },
     {
       "swara": "S",
       "when_prev": "R2",
-      "type": "kampita",
-      "depth_cents": 20,
-      "cycles": 0.5
+      "type": "jaru_in",
+      "portion": 0.4,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 48,
+      "kampita_cycles": 1.8
+    },
+    {
+      "swara": "P",
+      "when_next": "D1",
+      "type": "jaru_out",
+      "portion": 0.45,
+      "strength": 0.8,
+      "from_prev": true
+    },
+    {
+      "swara": "D1",
+      "when_prev": "P",
+      "type": "jaru_in",
+      "portion": 0.55,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 45,
+      "kampita_cycles": 1.2
+    },
+    {
+      "swara": "D1",
+      "when_next": "N2",
+      "type": "jaru_out",
+      "portion": 0.4,
+      "strength": 0.7,
+      "from_prev": true
+    },
+    {
+      "swara": "N2",
+      "when_prev": "D1",
+      "type": "jaru_in",
+      "portion": 0.5,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 50,
+      "kampita_cycles": 1.3
+    },
+    {
+      "swara": "N2",
+      "when_next": "S",
+      "type": "jaru_out",
+      "portion": 0.4,
+      "strength": 0.65,
+      "from_prev": true
+    },
+    {
+      "swara": "G3",
+      "when_prev": "R2",
+      "type": "jaru_in",
+      "portion": 0.45,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 40,
+      "kampita_cycles": 1.2
+    },
+    {
+      "swara": "M1",
+      "when_prev": "G3",
+      "type": "jaru_in",
+      "portion": 0.4,
+      "from_prev": true,
+      "then_kampita": true,
+      "kampita_depth": 32,
+      "kampita_cycles": 1.1
     }
   ]
 }
