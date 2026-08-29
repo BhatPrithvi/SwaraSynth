@@ -40,6 +40,7 @@ def cmd_render(args: argparse.Namespace) -> int:
         tempo_bpm=args.tempo,
         beats_per_note=args.beat,
         hold_beats=args.hold,
+        apply_gamaka_rules=not args.no_gamaka,
     )
     print(f"Wrote {out}")
     return 0
@@ -63,6 +64,11 @@ def build_parser() -> argparse.ArgumentParser:
     render_p.add_argument("--tempo", type=float, default=60.0, help="Tempo BPM")
     render_p.add_argument("--beat", type=float, default=0.5, help="Beats per swara")
     render_p.add_argument("--hold", type=float, default=0.5, help="Beats added per comma hold")
+    render_p.add_argument(
+        "--no-gamaka",
+        action="store_true",
+        help="Disable raga gamaka rules (plain swaras only)",
+    )
     render_p.set_defaults(func=cmd_render)
 
     return p

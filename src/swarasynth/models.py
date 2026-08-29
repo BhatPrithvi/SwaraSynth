@@ -34,3 +34,4 @@ class TimedNote:
     start: float
     duration: float
     velocity: int = 90
+    pitch_bends: tuple[tuple[float, float], ...] = ()  # (offset_sec, cents)

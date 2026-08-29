@@ -22,5 +22,41 @@
     "N2": 11,
     "N3": 12
   },
-  "gamaka_rules": []
+  "gamaka_rules": [
+    {
+      "swara": "P",
+      "when_next": "D1",
+      "type": "kampita",
+      "depth_cents": 28,
+      "cycles": 1
+    },
+    {
+      "swara": "G3",
+      "type": "kampita",
+      "depth_cents": 32,
+      "cycles": 1.5
+    },
+    {
+      "swara": "R2",
+      "when_prev": "M1",
+      "when_next": "S",
+      "type": "jaru_in",
+      "depth_cents": 55,
+      "portion": 0.4
+    },
+    {
+      "swara": "M1",
+      "when_next": "R2",
+      "type": "jaru_out",
+      "depth_cents": 40,
+      "portion": 0.3
+    },
+    {
+      "swara": "S",
+      "when_prev": "R2",
+      "type": "kampita",
+      "depth_cents": 20,
+      "cycles": 0.5
+    }
+  ]
 }

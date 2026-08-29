@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pretty_midi
 
+from swarasynth.gamaka import apply_gamakas, cents_to_pitch_bend
 from swarasynth.models import EventKind, ParsedEvent, TimedNote
 from swarasynth.tuning import load_raga, swara_to_midi
 
@@ -18,6 +19,7 @@ def events_to_timed_notes(
     hold_beats: float = 0.5,
     tempo_bpm: float = 60.0,
     ragas_dir: Path | None = None,
+    apply_gamaka_rules: bool = True,
 ) -> list[TimedNote]:
     """Convert parsed events to timed notes (seconds)."""
     raga = load_raga(raga_name, ragas_dir)
@@ -36,6 +38,7 @@ def events_to_timed_notes(
                     start=prev.start,
                     duration=prev.duration + extra,
                     velocity=prev.velocity,
+                    pitch_bends=prev.pitch_bends,
                 )
                 t += extra
             else:
@@ -48,6 +51,9 @@ def events_to_timed_notes(
         notes.append(TimedNote(pitch=pitch, start=t, duration=dur))
         last_note_idx = len(notes) - 1
         t += dur
+
+    if apply_gamaka_rules:
+        notes = apply_gamakas(notes, events, raga)
 
     return notes
 
@@ -65,6 +71,13 @@ def write_midi(
         instrument.notes.append(
             pretty_midi.Note(velocity=n.velocity, pitch=n.pitch, start=n.start, end=n.start + n.duration)
         )
+        for offset, cents in n.pitch_bends:
+            instrument.pitch_bends.append(
+                pretty_midi.PitchBend(
+                    pitch=cents_to_pitch_bend(cents),
+                    time=n.start + offset,
+                )
+            )
     pm.instruments.append(instrument)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -81,6 +94,7 @@ def render_notation_to_midi(
     beats_per_note: float = 0.5,
     hold_beats: float = 0.5,
     ragas_dir: Path | None = None,
+    apply_gamaka_rules: bool = True,
 ) -> Path:
     """Parse notation and write a MIDI file."""
     from swarasynth.parser import parse_notation
@@ -93,5 +107,6 @@ def render_notation_to_midi(
         hold_beats=hold_beats,
         tempo_bpm=tempo_bpm,
         ragas_dir=ragas_dir,
+        apply_gamaka_rules=apply_gamaka_rules,
     )
     return write_midi(notes, output_path)
