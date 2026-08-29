@@ -1,0 +1,26 @@
+{
+  "name": "charukeshi",
+  "tradition": "carnatic",
+  "description": "Charukeshi — S R2 G3 M1 P D1 N2 S'",
+  "tonic_midi": 60,
+  "scale": ["S", "R2", "G3", "M1", "P", "D1", "N2", "S"],
+  "pitch_map": {
+    "S": 0,
+    "R1": 1,
+    "R2": 2,
+    "R3": 3,
+    "G1": 3,
+    "G2": 4,
+    "G3": 5,
+    "M1": 6,
+    "M2": 7,
+    "P": 7,
+    "D1": 9,
+    "D2": 10,
+    "D3": 11,
+    "N1": 10,
+    "N2": 11,
+    "N3": 12
+  },
+  "gamaka_rules": []
+}
